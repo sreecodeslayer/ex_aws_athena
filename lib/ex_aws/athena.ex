@@ -30,6 +30,20 @@ defmodule ExAws.Athena do
     request(:start_query_execution, data)
   end
 
+  @doc """
+  Returns information about a single execution of a query.
+
+  Refer: https://docs.aws.amazon.com/athena/latest/APIReference/API_GetQueryExecution.html
+  """
+  @spec get_query_execution(query_execution_id :: String.t(), opts :: keyword()) :: JSON.t()
+  def get_query_execution(query_execution_id, _opts \\ []) do
+    data = %{
+      "QueryExecutionId" => query_execution_id
+    }
+
+    request(:get_query_execution, data)
+  end
+
   defp request(op, data, opts \\ %{}) do
     operation = op |> to_string() |> camelize()
 
