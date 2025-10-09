@@ -44,6 +44,20 @@ defmodule ExAws.Athena do
     request(:get_query_execution, data)
   end
 
+  @doc """
+  Returns the results of a single query execution.
+
+  Refer: https://docs.aws.amazon.com/athena/latest/APIReference/API_GetQueryResults.html
+  """
+  @spec get_query_results(query_execution_id :: String.t(), opts :: keyword()) :: JSON.t()
+  def get_query_results(query_execution_id, _opts \\ []) do
+    data = %{
+      "QueryExecutionId" => query_execution_id
+    }
+
+    request(:get_query_results, data)
+  end
+
   defp request(op, data, opts \\ %{}) do
     operation = op |> to_string() |> camelize()
 
