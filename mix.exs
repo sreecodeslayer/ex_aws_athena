@@ -2,7 +2,7 @@ defmodule ExAwsAthena.MixProject do
   use Mix.Project
 
   @version "0.1.0"
-  @service "dynamo"
+  @service "athena"
   @url "https://github.com/sreecodeslayer/ex_aws_#{@service}"
   @name __MODULE__ |> Module.split() |> Enum.take(2) |> Enum.join(".")
 
@@ -29,7 +29,7 @@ defmodule ExAwsAthena.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_aws, ">= 2.4.0"},
+      {:ex_aws, "~> 2.2"},
       {:ex_doc, ">= 0.0.0", only: :dev},
       {:hackney, ">= 0.0.0", only: [:dev, :test]},
       {:jason, ">= 0.0.0", only: [:dev, :test]},
@@ -52,11 +52,7 @@ defmodule ExAwsAthena.MixProject do
 
   defp docs do
     [
-      extras: [
-        "CHANGELOG.md",
-        "README.md",
-        "UPGRADE.md"
-      ],
+      extras: ["README.md"],
       main: "readme",
       source_url: @url,
       source_ref: "v#{@version}",
