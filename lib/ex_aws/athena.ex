@@ -81,6 +81,24 @@ defmodule ExAws.Athena do
     |> camelize_keys(deep: true)
   end
 
+  @doc """
+  Stops a query execution.
+
+  Worth calling whenever a caller gives up on a query — a timeout, a cancelled
+  request. Athena keeps scanning, and keeps billing, until it is told to stop.
+
+  Refer: https://docs.aws.amazon.com/athena/latest/APIReference/API_StopQueryExecution.html
+  """
+  @spec stop_query_execution(query_execution_id :: String.t(), opts :: keyword()) :: JSON.t()
+  def stop_query_execution(query_execution_id, opts \\ []) do
+    data =
+      opts
+      |> normalize_opts()
+      |> Map.put("QueryExecutionId", query_execution_id)
+
+    request(:stop_query_execution, data)
+  end
+
   defp request(op, data, opts \\ %{}) do
     operation = op |> to_string() |> camelize()
 
