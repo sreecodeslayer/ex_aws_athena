@@ -36,6 +36,17 @@ defmodule ExAws.AthenaTest do
     end
   end
 
+  describe "stop_query_execution/2" do
+    test "sends the execution id" do
+      assert %{"QueryExecutionId" => "q-1"} = body(ExAws.Athena.stop_query_execution("q-1"))
+    end
+
+    test "targets StopQueryExecution" do
+      %ExAws.Operation.JSON{headers: headers} = ExAws.Athena.stop_query_execution("q-1")
+      assert {_, "AmazonAthena.StopQueryExecution"} = List.keyfind(headers, "x-amz-target", 0)
+    end
+  end
+
   describe "get_query_execution/2" do
     test "sends the execution id" do
       assert %{"QueryExecutionId" => "q-1"} = body(ExAws.Athena.get_query_execution("q-1"))
